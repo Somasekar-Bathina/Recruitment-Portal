@@ -11,7 +11,7 @@ import com.project.fdb.Recruitment.Portal.Model.LoginDetails;
 @Repository
 public interface LoginRepository extends JpaRepository<LoginDetails,Integer>{
 
-	@Query(value = "select * from login_details where  email = :username AND password = :password",nativeQuery = true)
+	@Query(value = "select * from login_details where  email = :email AND password = :password",nativeQuery = true)
 	public LoginDetails findByUsernameAndPassword(@Param("email") String user_name, @Param("password") String password);
 
 	@Query(value = "select * from login_details where email = :email",nativeQuery = true)
