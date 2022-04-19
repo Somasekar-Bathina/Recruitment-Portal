@@ -17,6 +17,6 @@ public interface LoginRepository extends JpaRepository<LoginDetails,Integer>{
 	@Query(value = "select * from login_details where email = :email",nativeQuery = true)
 	public LoginDetails findByEmail(@Param("email") String email);
 	
-	@Query(value = "Update into login_details set password =:password where email=:email",nativeQuery=true)
+	@Query(value = "Update login_details set password =:password where email=:email",nativeQuery=true)
 	public void updatePassword(@Param("email") String email, @Param("password") String password);
 }

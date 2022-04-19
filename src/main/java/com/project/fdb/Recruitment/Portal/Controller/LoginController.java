@@ -38,7 +38,8 @@ public class LoginController {
 		if(Objects.isNull(candidateRegister)
 		   || StringUtils.isEmpty(candidateRegister.getEmail())
 		   || StringUtils.isEmpty(candidateRegister.getFirst_name())
-		   || StringUtils.isEmpty(candidateRegister.getPassword())) {
+		   || StringUtils.isEmpty(candidateRegister.getPassword())
+		   || StringUtils.isEmpty(candidateRegister.getGender())) {
 			response.setResponseCode(RPConstants.BAD_REQUEST_4XX_CODE);
 			response.setResponseMessage(RPConstants.INVALID_CREDENTIALS);
 			return response;
@@ -88,7 +89,8 @@ public class LoginController {
 		AppResponse response = AppResponse.builder().build();
 		String sanitizeParam = HtmlUtils.htmlEscape(email);
 		String santizePass = HtmlUtils.htmlEscape(password);
-		if(StringUtils.isEmpty(email))
+		if(StringUtils.isEmpty(sanitizeParam)
+				||StringUtils.isEmpty(santizePass))
 		    {
 			response.setResponseCode(RPConstants.BAD_REQUEST_4XX_CODE);
 			response.setResponseMessage(RPConstants.INVALID_EMAIL_ID);

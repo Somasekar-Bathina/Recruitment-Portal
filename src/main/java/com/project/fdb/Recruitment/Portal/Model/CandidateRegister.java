@@ -16,4 +16,6 @@ public class CandidateRegister {
 	private String email;
 	
 	private String password;
+	
+	private String gender;
 }

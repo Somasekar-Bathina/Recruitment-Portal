@@ -36,10 +36,21 @@ public class CandidateDetails {
 	@Column(name="dob")
 	private Date dob;
 	
+	@Column(name="gender")
+	private String gender;
+	
 	@Column(name="email")
 	private String email;
 	
 	@Column(name="phonenumber")
 	private String phonenumber;
 	
+	@Column(name = "address_line1")
+	private String address_line1;		
+	
+	@Column(name = "address_line2")
+	private String address_line2;
+	
+	@Column(name = "zipcode")
+	private String  zipcode;
 }

@@ -29,4 +29,7 @@ public class RPConstants {
 	public static final String EVENT_CREATION_FAILED = "Event Creation Failed";
 	public static final String EVENT_CREATED_SUCCESSFULLY = "EVENT_CREATED_SUCCESSFULLY";
 	public static final String USER_PASSWORD_UPDATED_SUCCESSFULLY = "USER PASSWORD UPDATED SUCCESSFULLY";
+	public static final String MALE = "Male";
+	public static final String FEMALE = "Female";
+	public static final String OTHERS = "Others";
 }
