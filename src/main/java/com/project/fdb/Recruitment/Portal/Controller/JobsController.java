@@ -49,7 +49,7 @@ public class JobsController {
 		return response;
 	}
 	
-	@GetMapping("/allJobs")
+	@GetMapping("/createJob")
 	public AppResponse createJob(@RequestBody AvailableJobs availableJobs) {
 		
 		AppResponse response =AppResponse.builder().build();
