@@ -1,6 +1,7 @@
 package com.project.fdb.Recruitment.Portal.Model;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,19 +16,10 @@ public class CandidateAvaialableJobResponse {
 
 	private Integer candidateId;
 	
-	private Integer jobId;
+	List<AvailableJobs> appliedJobs;
 	
-	private String jobTitle;
+	List<AvailableJobs> openPositions;
 	
-	private String jobDescription;
-	
-	private Boolean isApplied;
-	
-	private String branchName;
-	
-	private String location;
-	
-	private Date effectiveDate;
 	
 	
 }
