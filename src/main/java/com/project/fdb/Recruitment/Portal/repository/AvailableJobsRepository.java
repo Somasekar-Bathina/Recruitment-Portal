@@ -10,5 +10,5 @@ import com.project.fdb.Recruitment.Portal.Model.CandidateAvaialableJobResponse;
 @Repository
 public interface AvailableJobsRepository extends JpaRepository<AvailableJobs, Integer>{
 
-	public CandidateAvaialableJobResponse getCandidateAvailableJobs(@Param("candidateId") Integer candidateId );
+	public CandidateAvaialableJobResponse getCandidateAppliedJobs(@Param("candidateId") Integer candidateId );
 }

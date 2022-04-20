@@ -5,6 +5,7 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,10 +21,11 @@ import lombok.NoArgsConstructor;
 public class AvailableJobs {
 
 	@Id
-	@GeneratedValue()
+	@Column(name = "job_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer job_id;
 	
-	@Column
+	@Column(name = "job_title")
 	private String job_title;
 	
 	@Column(name = "employment_type")
@@ -37,4 +39,8 @@ public class AvailableJobs {
 	
 	@Column(name = "jobcode_id")
 	private Integer jobcode_id;
+	
+	@Column(name = "status_code")
+	private Integer status_code;
+	
 }
