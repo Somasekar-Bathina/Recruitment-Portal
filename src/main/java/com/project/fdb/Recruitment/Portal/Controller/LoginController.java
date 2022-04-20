@@ -23,7 +23,6 @@ import com.project.fdb.Recruitment.Portal.utilities.RPConstants;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/RP")
 @Slf4j
 public class LoginController {
