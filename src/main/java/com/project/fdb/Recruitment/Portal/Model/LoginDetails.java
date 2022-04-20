@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Table(name = "LoginDetails")
+@Table(name = "login")
 @Getter
 @Setter
 @Builder
@@ -30,7 +30,7 @@ public class LoginDetails {
 	@Column(name = "password")
 	private String	password; 
 	
-	@Column
+	@Column(name ="user_type")
 	private String userType;
 
 	}

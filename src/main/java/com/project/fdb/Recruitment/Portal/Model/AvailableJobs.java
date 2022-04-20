@@ -10,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Builder
 @Table(name = "available_jobs")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +31,7 @@ public class AvailableJobs {
 	private String job_title;
 	
 	@Column(name = "employment_type")
-	private char employeeType;
+	private char employment_type;
 	
 	@Column(name ="job_description")
 	private String job_description;
