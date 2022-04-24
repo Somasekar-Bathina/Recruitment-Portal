@@ -2,11 +2,15 @@ package com.project.fdb.Recruitment.Portal.Model;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -51,6 +55,13 @@ public class CandidateDetails {
 	@Column(name = "address_line2")
 	private String address_line2;
 	
-	@Column(name = "zipcode")
-	private String  zipcode;
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
+	private ZipLocations  zipcode;
+	
+	@Column(name = "step_id")
+	private String step_id;
+
+
+	
 }
