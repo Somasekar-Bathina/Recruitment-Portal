@@ -23,6 +23,6 @@ public class CandidateQualification {
 	@Column(name = "institute_name")
 	private String institute_name;
 	
-	@Column(name = "passing _year")
-	private String yearOfPassing;
+	@Column(name = "passing_year")
+	private Integer yearOfPassing;
 }

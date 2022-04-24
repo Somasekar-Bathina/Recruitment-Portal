@@ -4,20 +4,25 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @Entity
 @Table(name="interview_schedule")
+@AllArgsConstructor
+@NoArgsConstructor
 public class InterviewDetails {
 	
-	@Column(name ="candidate_id")
-	private String candidate_id;
+	@EmbeddedId
+	private CandidateApplicationId candAppId;
 	
 	@Column(name = "interview_date")
 	private Date interview_date;

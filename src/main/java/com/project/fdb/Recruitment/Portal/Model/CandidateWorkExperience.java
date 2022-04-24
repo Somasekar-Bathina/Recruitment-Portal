@@ -22,5 +22,5 @@ public class CandidateWorkExperience {
 	private CandidateWorkId candidateWorkId;
 	
 	@Column(name = "years")
-	private String years;
+	private Integer years;
 }

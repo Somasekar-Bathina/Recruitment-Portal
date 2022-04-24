@@ -1,5 +1,7 @@
 package com.project.fdb.Recruitment.Portal.Model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +15,8 @@ public class Candidate {
 
 	private CandidateDetails candidateDetails;
 	
-	private CandidateWorkExperience workExperience;
+	private List<CandidateWorkExperience> workExperience;
 	
-	private CandidateQualification candQualifications;
+	private List<CandidateQualification> candQualifications;
 
 }
