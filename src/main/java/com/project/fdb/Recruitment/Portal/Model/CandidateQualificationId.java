@@ -8,10 +8,12 @@ import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Embeddable
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CandidateQualificationId implements Serializable{

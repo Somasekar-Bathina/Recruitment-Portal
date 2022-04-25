@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.fdb.Recruitment.Portal.Model.AppResponse;
 import com.project.fdb.Recruitment.Portal.Model.AvailableJobs;
+import com.project.fdb.Recruitment.Portal.Model.CandidateApplication;
 import com.project.fdb.Recruitment.Portal.repository.AvailableJobsRepository;
 import com.project.fdb.Recruitment.Portal.service.AvailableJobsService;
+import com.project.fdb.Recruitment.Portal.service.JobService;
 import com.project.fdb.Recruitment.Portal.utilities.RPConstants;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +32,9 @@ public class JobsController {
 	
 	@Autowired
 	private AvailableJobsRepository availableJobsRepo;
+	
+	@Autowired
+	private JobService jobService;
 	
 	@GetMapping("/candidate/availableJobs")
 	public AppResponse getCandidateAvailableJobs(@RequestHeader Integer candidateId) {
@@ -66,5 +72,23 @@ public class JobsController {
 		response.setResponseMessage("Recorded Inserted Successfully");
 		response.setResponseObject(availableJobs);
 		return response;
+	}
+	
+	@PostMapping("/candidate/applyJob")
+	public AppResponse applyJob(@RequestBody CandidateApplication candidateApplication) {
+		
+		AppResponse response = AppResponse.builder().responseCode(RPConstants.BAD_REQUEST_4XX_CODE).build();
+		log.info("Invoked Apply Job Method for Candidate ID:{} and Job ID:{}");
+		if(Objects.isNull(candidateApplication)
+				|| Objects.isNull(candidateApplication.getCandApplicationId())
+				|| Objects.isNull(candidateApplication.getCandApplicationId().getCandidate_id())
+				|| Objects.isNull(candidateApplication.getCandApplicationId().getJob_id())) {
+			log.info("Apply Job is Invoked with invalid candidateapplication {}",candidateApplication);
+			response.setResponseMessage(RPConstants.INVALID_CAND_APPLICATION);
+			return response;
+		}
+		
+		return jobService.applyJob(candidateApplication);
+		
 	}
 }

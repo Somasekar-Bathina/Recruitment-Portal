@@ -1,5 +1,6 @@
 package com.project.fdb.Recruitment.Portal.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -12,7 +13,9 @@ import com.project.fdb.Recruitment.Portal.Model.AppResponse;
 import com.project.fdb.Recruitment.Portal.Model.Candidate;
 import com.project.fdb.Recruitment.Portal.Model.CandidateDetails;
 import com.project.fdb.Recruitment.Portal.Model.CandidateQualification;
+import com.project.fdb.Recruitment.Portal.Model.CandidateQualificationId;
 import com.project.fdb.Recruitment.Portal.Model.CandidateWorkExperience;
+import com.project.fdb.Recruitment.Portal.Model.CandidateWorkId;
 import com.project.fdb.Recruitment.Portal.Model.ZipLocations;
 import com.project.fdb.Recruitment.Portal.repository.CandidateDetailsRepository;
 import com.project.fdb.Recruitment.Portal.repository.CandidateQualificationRepository;
@@ -120,5 +123,92 @@ public class CandidateServiceImpl implements CandidateService{
 		}catch(Exception e) {
 			log.info("Exception occured while updating zip location {}",e.getMessage());
 		}
+	}
+	
+	public AppResponse saveEducationalDetails(List<CandidateQualification> candidateQualDetails) {
+		
+		AppResponse response = AppResponse.builder().responseCode(RPConstants.BAD_REQUEST_4XX_CODE)
+				.responseMessage(RPConstants.SAVE_EDUCATION_DETAILS_FAILED).build();
+		List<CandidateQualification> candQualNewEntry = new ArrayList<>();
+		try {
+		candidateQualDetails.stream()
+		.forEach((candQualDetl)->
+		{
+			if(Objects.isNull(candQualDetl.getCandQualId())
+					|| Objects.isNull(candQualDetl.getCandQualId().getCandidate_id())
+					||  Objects.isNull(candQualDetl.getCandQualId().getQualification_type())) {
+				log.info("Null Values provided in the Candidate Qualification Details {}",candQualDetl);
+				return;
+			}
+				
+		Optional<CandidateQualification> candQual = null;
+		try {
+			CandidateQualificationId qualId = candQualDetl.getCandQualId();
+			candQual = candQualRepo.findById(qualId);
+			if(candQual.isPresent()) {
+				log.info("Updating Candidate Qualification for candidate:{} and Qualification Type {}",qualId.getCandidate_id(),qualId.getQualification_type());
+				if(Objects.nonNull(candQualDetl.getInstitute_name())){
+					candQual.get().setInstitute_name(candQualDetl.getInstitute_name());
+				}
+				if(Objects.nonNull(candQualDetl.getInstitute_name())){
+					candQual.get().setYearOfPassing(candQualDetl.getYearOfPassing());
+				}
+				candQualRepo.save(candQual.get());
+				return;
+			}
+			candQualNewEntry.add(candQualDetl);
+			
+		}catch(Exception e) {
+			log.info("Exception occured while updating Qualification{} {}",candQualDetl,e.getMessage());
+		}
+		});
+		candQualRepo.saveAll(candQualNewEntry);
+		}catch(Exception e) {
+			log.info("Exception Occured While streaming data in save Education Details {}",e.getMessage());
+		}
+		response.setResponseMessage(RPConstants.SAVE_EDUCATION_DETAILS_SUCCESSFULL);
+		return response;
+	}
+	
+public AppResponse saveWorkExpDetails(List<CandidateWorkExperience> candidateWorkDetails) {
+		
+		AppResponse response = AppResponse.builder().responseCode(RPConstants.BAD_REQUEST_4XX_CODE)
+				.responseMessage(RPConstants.SAVE_WORK_DETAILS_FAILED).build();
+		List<CandidateWorkExperience> candWorkNewEntry = new ArrayList<>();
+		try {
+			candidateWorkDetails.stream()
+		.forEach((candWorkDetl)->
+		{
+			if(Objects.isNull(candWorkDetl.getCandidateWorkId())
+					|| Objects.isNull(candWorkDetl.getCandidateWorkId().getCandidate_id())
+					||  Objects.isNull(candWorkDetl.getCandidateWorkId().getCompany_name())) {
+				log.info("Null Values provided in the Candidate Qualification Details {}",candWorkDetl);
+				return;
+			}
+				
+		Optional<CandidateWorkExperience> candWork = null;
+		try {
+			CandidateWorkId worklId = candWorkDetl.getCandidateWorkId();
+			candWork = candWorkRepo.findById(worklId);
+			if(candWork.isPresent()) {
+				log.info("Updating Candidate Work Experience for candidate:{} and Company Type {}",worklId.getCandidate_id(),worklId.getCompany_name());
+				if(Objects.nonNull(candWorkDetl.getYears())){
+					candWork.get().setYears(candWorkDetl.getYears());
+				}
+				candWorkRepo.save(candWork.get());
+				return;
+			}
+			candWorkNewEntry.add(candWorkDetl);
+			
+		}catch(Exception e) {
+			log.info("Exception occured while updating Qualification{} {}",candWorkDetl,e.getMessage());
+		}
+		});
+		candWorkRepo.saveAll(candWorkNewEntry);
+		}catch(Exception e) {
+			log.info("Exception Occured While streaming data in save Education Details {}",e.getMessage());
+		}
+		response.setResponseMessage(RPConstants.SAVE_EDUCATION_DETAILS_SUCCESSFULL);
+		return response;
 	}
 }
