@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -57,6 +59,7 @@ public class CandidateDetails {
 	
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
+	@JsonIgnore
 	private ZipLocations  zipcode;
 	
 	@Column(name = "step_id")

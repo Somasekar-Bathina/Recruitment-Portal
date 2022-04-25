@@ -48,11 +48,12 @@ public class CandidateServiceImpl implements CandidateService{
 				.build();
 		Candidate candidate = Candidate.builder().build();
 		try {
-		Optional<CandidateDetails> candDetails = candRepo.findById(candidateId);
+		CandidateDetails candDetails = candRepo.findByCandidateId(candidateId);
 		List<CandidateWorkExperience> workExp = candWorkRepo.getWorkExperienceList(candidateId);
 		List<CandidateQualification> candQual = candQualRepo.getQualificationList(candidateId);
 		candidate=  Candidate.builder()
 					.candidateDetails(candDetails.isPresent()?candDetails.get():null)
+					.zipCode(candDetails.get().getZipcode())
 					.workExperience(workExp)
 					.candQualifications(candQual)
 					.build();
@@ -164,7 +165,7 @@ public class CandidateServiceImpl implements CandidateService{
 		}
 		});
 		candQualRepo.saveAll(candQualNewEntry);
-		updateStepNumber(candidate)
+//		updateStepNumber(candidate)
 		}catch(Exception e) {
 			log.info("Exception Occured While streaming data in save Education Details {}",e.getMessage());
 		}

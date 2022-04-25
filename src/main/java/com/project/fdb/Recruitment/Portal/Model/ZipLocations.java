@@ -32,6 +32,5 @@ public class ZipLocations {
 	private String country;
 	
 	@OneToOne(mappedBy = "zipcode",fetch = FetchType.LAZY)
-	@JsonIgnore
 	private CandidateDetails candDetails;
 }

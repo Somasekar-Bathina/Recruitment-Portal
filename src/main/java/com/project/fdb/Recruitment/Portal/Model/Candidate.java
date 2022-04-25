@@ -15,6 +15,8 @@ public class Candidate {
 
 	private CandidateDetails candidateDetails;
 	
+	private ZipLocations zipCode;
+	
 	private List<CandidateWorkExperience> workExperience;
 	
 	private List<CandidateQualification> candQualifications;

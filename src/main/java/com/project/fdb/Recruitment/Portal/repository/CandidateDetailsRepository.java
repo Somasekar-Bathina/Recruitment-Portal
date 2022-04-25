@@ -12,4 +12,7 @@ public interface CandidateDetailsRepository extends JpaRepository<CandidateDetai
 
 	@Query(value = "select * from candidate_details where email=:email",nativeQuery = true)
 	public CandidateDetails getCandidateDetails(@Param("email") String email);
+
+	@Query(value = "select * from candidate_details where candidate_id=:candidateId",nativeQuery=true)
+	public CandidateDetails findByCandidateId(@Param("candidateId") Integer candidateId);
 }
