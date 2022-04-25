@@ -39,4 +39,11 @@ public class RPConstants {
 	public static final String SAVE_WORK_DETAILS_SUCCESSFULL = "Save Work Details Failed";
 	public static final String SAVE_EDUCATION_DETAILS_SUCCESSFULL = "Save Education Details Failed";
 	public static final String INVALID_CAND_APPLICATION="Invalid Candidate Application. Please Provide Valid Candidate Application";
+	public static final String CANDIDATEAPPLCIATION_ALREADY_EXIST ="CANDIDATEAPPLCIATION_ALREADY_EXIST";
+	public static final Integer CANDIDATE_APPLICATION_CREATED_CODE = 101;
+	public static final Integer JOB_ID_CLOSED = 112;
+	public static final String JOB_ID_EXPIRED_OR_INVALID = "Job Id is expired or Invalid";
+	public static final Integer PENDING_ASSESSMENT_CODE=102;
+	public static final String OPEN="OPEN";
+	public static final String CLOSED="CLOSED";
 }
