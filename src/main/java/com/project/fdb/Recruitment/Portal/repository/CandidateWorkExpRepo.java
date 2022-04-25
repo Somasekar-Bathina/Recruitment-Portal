@@ -17,4 +17,7 @@ public interface CandidateWorkExpRepo extends JpaRepository<CandidateWorkExperie
 	@Query(value = "select * from candidate_work_experience where candidate_id=:candidateId",nativeQuery = true)
 	public List<CandidateWorkExperience> getWorkExperienceList(@Param("candidateId") Integer candidateId);
 
+	@Query(value = "select * from candidate_work_experience where candidate_id=:candidateId and company_name=:companyName",nativeQuery=true)
+	public CandidateWorkExperience findByWorkId(@Param("candidateId")Integer candidate_id,@Param("companyName") String company_name);
+
 }

@@ -30,15 +30,14 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	@PostMapping("/signup")
+	@PostMapping("/register")
 	public AppResponse signup(@RequestBody CandidateRegister candidateRegister ) {
 		
 		AppResponse response = AppResponse.builder().build();
 		if(Objects.isNull(candidateRegister)
 		   || StringUtils.isEmpty(candidateRegister.getEmail())
 		   || StringUtils.isEmpty(candidateRegister.getFirst_name())
-		   || StringUtils.isEmpty(candidateRegister.getPassword())
-		   || StringUtils.isEmpty(candidateRegister.getGender())) {
+		   || StringUtils.isEmpty(candidateRegister.getPassword())) {
 			response.setResponseCode(RPConstants.BAD_REQUEST_4XX_CODE);
 			response.setResponseMessage(RPConstants.INVALID_CREDENTIALS);
 			return response;

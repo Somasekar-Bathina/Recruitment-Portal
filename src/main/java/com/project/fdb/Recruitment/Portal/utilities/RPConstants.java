@@ -46,4 +46,6 @@ public class RPConstants {
 	public static final Integer PENDING_ASSESSMENT_CODE=102;
 	public static final String OPEN="OPEN";
 	public static final String CLOSED="CLOSED";
+	public static final String JOB_APPLIED_SUCCESSFULLY = "Job Applied Successfully";
+	public static final Integer CANDIDATE_DETAILS_STEP_NUMBER = 1;
 }

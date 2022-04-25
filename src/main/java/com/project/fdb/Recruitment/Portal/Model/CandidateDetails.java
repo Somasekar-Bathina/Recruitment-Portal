@@ -60,7 +60,7 @@ public class CandidateDetails {
 	private ZipLocations  zipcode;
 	
 	@Column(name = "step_id")
-	private String step_id;
+	private Integer step_id;
 
 
 	

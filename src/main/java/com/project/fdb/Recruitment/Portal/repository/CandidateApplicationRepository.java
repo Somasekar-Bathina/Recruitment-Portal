@@ -15,4 +15,8 @@ public interface CandidateApplicationRepository extends JpaRepository<CandidateA
 
 	@Query(value = "select * from candidate_application where candidate_id=:candidate_id",nativeQuery=true)
 	public List<CandidateApplication> getCandidateApplicationDetails(@Param("candidate_id")Integer candidateId);
+	
+	@Query(value = "select * from candidate_application where candidate_id=:candidateId and job_id=:jobId",nativeQuery=true)
+	public CandidateApplication findByCandidateApplicationId(@Param("candidateId")Integer candidateId,@Param("jobId")Integer jobId);
+	
 }

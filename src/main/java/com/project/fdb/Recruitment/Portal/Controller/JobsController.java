@@ -2,10 +2,12 @@ package com.project.fdb.Recruitment.Portal.Controller;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,18 +57,22 @@ public class JobsController {
 		return response;
 	}
 	
-	@GetMapping("/createJob")
+	@PutMapping("/createJob")
 	public AppResponse createJob(@RequestBody AvailableJobs availableJobs) {
 		
-		AppResponse response =AppResponse.builder().build();
+		AppResponse response =AppResponse.builder().responseCode(RPConstants.BAD_REQUEST_4XX_CODE).build();
 		if(Objects.isNull(availableJobs)) {
 			response.setResponseCode(RPConstants.BAD_REQUEST_4XX_CODE);
 			response.setResponseMessage("Invalid Request Returned");
 		}
 		try {
+		//int randomNo = ThreadLocalRandom.current().nextInt(10000, 200000);
+		//availableJobs.setJob_id(randomNo);
 		availableJobsRepo.save(availableJobs);
 		}catch(Exception e) {
 			log.info("Exception occured while adding data to DB {}",e.getMessage());
+			response.setResponseMessage("Exception occured while crating a new job");
+			return response;
 		}
 		response.setResponseCode(RPConstants.SUCCESS_2XX_CODE);
 		response.setResponseMessage("Recorded Inserted Successfully");

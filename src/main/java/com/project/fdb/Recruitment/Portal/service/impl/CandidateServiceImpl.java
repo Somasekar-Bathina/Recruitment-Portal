@@ -73,6 +73,7 @@ public class CandidateServiceImpl implements CandidateService{
 			candDetails = candRepo.getById(candidateDetails.getCandidateId());
 			updateCandidateDetails(candidateDetails,candDetails);
 			candRepo.save(candDetails);
+			candDetails.setStep_id(RPConstants.CANDIDATE_DETAILS_STEP_NUMBER);
 			log.info("Candidate Details Updated Successfully");
 		}catch(Exception e) {
 			log.info("Exception occured while adding candidateDetails {}",e.getMessage());
@@ -141,19 +142,19 @@ public class CandidateServiceImpl implements CandidateService{
 				return;
 			}
 				
-		Optional<CandidateQualification> candQual = null;
+		CandidateQualification candQual = null;
 		try {
 			CandidateQualificationId qualId = candQualDetl.getCandQualId();
-			candQual = candQualRepo.findById(qualId);
-			if(candQual.isPresent()) {
+			candQual = candQualRepo.findByCandidateQualId(qualId.getCandidate_id(),qualId.getQualification_type());
+			if(Objects.nonNull(candQual)) {
 				log.info("Updating Candidate Qualification for candidate:{} and Qualification Type {}",qualId.getCandidate_id(),qualId.getQualification_type());
 				if(Objects.nonNull(candQualDetl.getInstitute_name())){
-					candQual.get().setInstitute_name(candQualDetl.getInstitute_name());
+					candQual.setInstitute_name(candQualDetl.getInstitute_name());
 				}
 				if(Objects.nonNull(candQualDetl.getInstitute_name())){
-					candQual.get().setYearOfPassing(candQualDetl.getYearOfPassing());
+					candQual.setYearOfPassing(candQualDetl.getYearOfPassing());
 				}
-				candQualRepo.save(candQual.get());
+				candQualRepo.save(candQual);
 				return;
 			}
 			candQualNewEntry.add(candQualDetl);
@@ -163,6 +164,7 @@ public class CandidateServiceImpl implements CandidateService{
 		}
 		});
 		candQualRepo.saveAll(candQualNewEntry);
+		updateStepNumber(candidate)
 		}catch(Exception e) {
 			log.info("Exception Occured While streaming data in save Education Details {}",e.getMessage());
 		}
@@ -186,16 +188,16 @@ public AppResponse saveWorkExpDetails(List<CandidateWorkExperience> candidateWor
 				return;
 			}
 				
-		Optional<CandidateWorkExperience> candWork = null;
+		CandidateWorkExperience candWork = null;
 		try {
-			CandidateWorkId worklId = candWorkDetl.getCandidateWorkId();
-			candWork = candWorkRepo.findById(worklId);
-			if(candWork.isPresent()) {
-				log.info("Updating Candidate Work Experience for candidate:{} and Company Type {}",worklId.getCandidate_id(),worklId.getCompany_name());
+			CandidateWorkId workId = candWorkDetl.getCandidateWorkId();
+			candWork = candWorkRepo.findByWorkId(workId.getCandidate_id(),workId.getCompany_name());
+			if(Objects.nonNull(candWork)) {
+				log.info("Updating Candidate Work Experience for candidate:{} and Company Type {}",workId.getCandidate_id(),workId.getCompany_name());
 				if(Objects.nonNull(candWorkDetl.getYears())){
-					candWork.get().setYears(candWorkDetl.getYears());
+					candWork.setYears(candWorkDetl.getYears());
 				}
-				candWorkRepo.save(candWork.get());
+				candWorkRepo.save(candWork);
 				return;
 			}
 			candWorkNewEntry.add(candWorkDetl);
