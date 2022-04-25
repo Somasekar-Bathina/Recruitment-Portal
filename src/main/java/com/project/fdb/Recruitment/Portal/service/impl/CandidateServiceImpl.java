@@ -53,7 +53,6 @@ public class CandidateServiceImpl implements CandidateService{
 		List<CandidateQualification> candQual = candQualRepo.getQualificationList(candidateId);
 		candidate=  Candidate.builder()
 					.candidateDetails(candDetails)
-					.zipCode(candDetails.getZipcode())
 					.workExperience(workExp)
 					.candQualifications(candQual)
 					.build();
