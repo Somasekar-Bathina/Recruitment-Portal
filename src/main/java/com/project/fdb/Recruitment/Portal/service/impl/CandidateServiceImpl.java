@@ -52,8 +52,8 @@ public class CandidateServiceImpl implements CandidateService{
 		List<CandidateWorkExperience> workExp = candWorkRepo.getWorkExperienceList(candidateId);
 		List<CandidateQualification> candQual = candQualRepo.getQualificationList(candidateId);
 		candidate=  Candidate.builder()
-					.candidateDetails(candDetails.isPresent()?candDetails.get():null)
-					.zipCode(candDetails.get().getZipcode())
+					.candidateDetails(candDetails)
+					.zipCode(candDetails.getZipcode())
 					.workExperience(workExp)
 					.candQualifications(candQual)
 					.build();
