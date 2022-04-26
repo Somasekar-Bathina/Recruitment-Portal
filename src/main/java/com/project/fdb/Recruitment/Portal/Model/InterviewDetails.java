@@ -27,7 +27,7 @@ public class InterviewDetails {
 	@Column(name = "interview_date")
 	private Date interview_date;
 	
-	@Column(name = "status_codee")
+	@Column(name = "status_code")
 	private Integer status_code;
 	
 	@Column(name= "interview_by")
