@@ -36,8 +36,8 @@ public class RPConstants {
 	public static final String SAVE_EDUCATION_DETAILS_FAILED = "Save Education Details Failed";
 	public static final String INVALID_WORK_EXPERIENCE = "Invalid WorkExperience Details.Please Provide Valid Details!!";
 	public static final String SAVE_WORK_DETAILS_FAILED = "Save Work Details Failed";
-	public static final String SAVE_WORK_DETAILS_SUCCESSFULL = "Save Work Details Failed";
-	public static final String SAVE_EDUCATION_DETAILS_SUCCESSFULL = "Save Education Details Failed";
+	public static final String SAVE_WORK_DETAILS_SUCCESSFULL = "Save Work Details Successfull";
+	public static final String SAVE_EDUCATION_DETAILS_SUCCESSFULL = "Save Education Details Successfull";
 	public static final String INVALID_CAND_APPLICATION="Invalid Candidate Application. Please Provide Valid Candidate Application";
 	public static final String CANDIDATEAPPLCIATION_ALREADY_EXIST ="CANDIDATEAPPLCIATION_ALREADY_EXIST";
 	public static final Integer CANDIDATE_APPLICATION_CREATED_CODE = 101;

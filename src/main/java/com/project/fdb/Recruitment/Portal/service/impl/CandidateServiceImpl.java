@@ -169,6 +169,7 @@ public class CandidateServiceImpl implements CandidateService{
 			log.info("Exception Occured While streaming data in save Education Details {}",e.getMessage());
 		}
 		response.setResponseMessage(RPConstants.SAVE_EDUCATION_DETAILS_SUCCESSFULL);
+		response.setResponseCode(RPConstants.SUCCESS_2XX_CODE);
 		return response;
 	}
 	
@@ -211,6 +212,7 @@ public AppResponse saveWorkExpDetails(List<CandidateWorkExperience> candidateWor
 			log.info("Exception Occured While streaming data in save Education Details {}",e.getMessage());
 		}
 		response.setResponseMessage(RPConstants.SAVE_EDUCATION_DETAILS_SUCCESSFULL);
+		response.setResponseCode(RPConstants.SUCCESS_2XX_CODE);
 		return response;
 	}
 }
