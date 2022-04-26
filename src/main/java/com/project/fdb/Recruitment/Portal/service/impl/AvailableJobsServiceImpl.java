@@ -1,5 +1,6 @@
 package com.project.fdb.Recruitment.Portal.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -32,8 +33,8 @@ public class AvailableJobsServiceImpl implements AvailableJobsService{
 		
 		CandidateAvaialableJobResponse candidateAvailableJobResponse = CandidateAvaialableJobResponse.builder().build();
 		AppResponse response = AppResponse.builder().build();
-		List<AvailableJobs> appliedJobs = null;
-		List<AvailableJobs> openJobs =null;
+		List<AvailableJobs> appliedJobs = new ArrayList<>();
+		List<AvailableJobs> openJobs = new ArrayList<>();
 		try {
 			List<AvailableJobs> availableJobs = availableJobsRepo.findActiveJobs();
 			List<CandidateApplication> candApplicationlist = candRepo.getCandidateApplicationDetails(candidateId);
@@ -55,13 +56,17 @@ public class AvailableJobsServiceImpl implements AvailableJobsService{
 		}catch(Exception e) {
 			log.info("Exception occured while getting candidate available jobs{}",e.getMessage());
 		}
-		
-		
+		candidateAvailableJobResponse.setAppliedJobs(appliedJobs);
+		candidateAvailableJobResponse.setCandidateId(candidateId);
+		candidateAvailableJobResponse.setOpenPositions(openJobs);
+		response.setResponseCode(RPConstants.SUCCESS_2XX_CODE);
+		response.setResponseMessage("Jobs Available to Apply for Candidate fetched successfully");
+		response.setResponseObject(candidateAvailableJobResponse);
 		return response;
 	}
 
 	private boolean findByJobId(AvailableJobs job, List<CandidateApplication> candApplication) {
-		AtomicReference<Integer> flag=new AtomicReference<>();
+		AtomicReference<Integer> flag=new AtomicReference<>(0);
 		candApplication.stream()
 		.forEach((candAppl)->{
 			if(candAppl.getCandApplicationId().getJob_id()==job.getJob_id()) {

@@ -4,45 +4,46 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.fdb.Recruitment.Portal.Model.AppResponse;
 import com.project.fdb.Recruitment.Portal.Model.CandidateApplication;
-import com.project.fdb.Recruitment.Portal.Model.InterviewDetails;
-import com.project.fdb.Recruitment.Portal.repository.InterviewDetailsRepository;
+import com.project.fdb.Recruitment.Portal.repository.CandidateApplicationRepository;
+import com.project.fdb.Recruitment.Portal.repository.EmployeeRepository;
 import com.project.fdb.Recruitment.Portal.utilities.RPConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/RP")
 @CrossOrigin
+@RequestMapping("/RP/Employee")
 @Slf4j
-public class InterviewController {
+public class EmployeeController {
 	
 	@Autowired
-	private InterviewDetailsRepository interviewRepo;
+	private EmployeeRepository employeeRepo;
 	
-	@PostMapping("/getAllInterview")
-	public AppResponse getAllInterviews() {
+	@Autowired
+	private CandidateApplicationRepository candRepo;
+	
+	
+	@GetMapping("/getAllCandidateApplications")
+	public AppResponse getAllCandidateApplications() {
 		
 		AppResponse response = AppResponse.builder().responseCode(RPConstants.BAD_REQUEST_4XX_CODE).build();
-		List<InterviewDetails> candApplList = null;
+		List<CandidateApplication> candApplList = null;
 		try {
-			candApplList=interviewRepo.findAll();
-			response.setResponseCode(RPConstants.SUCCESS_2XX_CODE);
-			response.setResponseMessage("All Interview Scheduled are fetched successfully");
+			candApplList= candRepo.findAll();
+			response.setResponseMessage("CandidateApplciations fetched successfully");
 			response.setResponseObject(candApplList);
 		}catch(Exception e) {
-			log.info("Exception occured while fetching all interview details {}",e.getMessage());
-			response.setResponseMessage("Exception Occured");
+			log.info("Exception occured while fetching {}",e.getMessage());
 		}
 		
-		return response;
 		
+		return response;
 	}
 
-	
 }

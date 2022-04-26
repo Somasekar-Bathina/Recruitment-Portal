@@ -43,6 +43,11 @@ public class JobsController {
 	@GetMapping("/candidate/availableJobs")
 	public AppResponse getCandidateAvailableJobs(@RequestHeader Integer candidateId) {
 		
+		AppResponse response = AppResponse.builder().responseCode(RPConstants.BAD_REQUEST_4XX_CODE).build();
+		if(candidateId  == null) {
+			response.setResponseMessage("Candidate Id  Is Null");
+			return response;
+		}
 		return availableJobService.getCandidateAvailableJobs(candidateId);
 	}
 	

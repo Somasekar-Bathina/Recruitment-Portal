@@ -72,8 +72,8 @@ public class CandidateServiceImpl implements CandidateService{
 		try {
 			candDetails = candRepo.getById(candidateDetails.getCandidateId());
 			updateCandidateDetails(candidateDetails,candDetails);
-			candRepo.save(candDetails);
 			candDetails.setStep_id(RPConstants.CANDIDATE_DETAILS_STEP_NUMBER);
+			candRepo.save(candDetails);
 			log.info("Candidate Details Updated Successfully");
 		}catch(Exception e) {
 			log.info("Exception occured while adding candidateDetails {}",e.getMessage());

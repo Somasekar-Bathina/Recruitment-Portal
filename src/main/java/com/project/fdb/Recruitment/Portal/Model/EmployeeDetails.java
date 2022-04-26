@@ -13,9 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,23 +22,28 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name= "candidate_details")
+@Table(name= "employee_details")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
-public class CandidateDetails {
-	
-	@Id
-	@Column(name= "candidate_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer candidateId;
+public class EmployeeDetails {
 
-	@Column(name="first_name")
+	@Id
+	@Column(name= "emp_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer employeeId;
+
+	@Column(name="fname")
 	private String first_name;
 	
-	@Column(name="last_name")
+	@Column(name="lname")
 	private String last_name;
+	
+	@Column(name="jobcode_id")
+	private String jobcode_id;
+	
+	@Column(name="employee_type")
+	private String employee_type;
 	
 	@Column(name="dob")
 	private Date dob;
@@ -51,6 +54,9 @@ public class CandidateDetails {
 	@Column(name="email")
 	private String email;
 	
+	@Column(name="martial_status")
+	private String martialStatus;
+	
 	@Column(name="phonenumber")
 	private String phonenumber;
 	
@@ -60,14 +66,14 @@ public class CandidateDetails {
 	@Column(name = "address_line2")
 	private String address_line2;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@Column(name="joining_table")
+	private Date joiningDate;
+	
+	@Column(name="termination_date")
+	private Date terminationDate;
+	
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "zipcode", referencedColumnName = "zipcode")
-	@JsonBackReference
+	@JsonIgnore
 	private ZipLocations  zipcode;
-	
-	@Column(name = "step_id")
-	private Integer step_id;
-
-
-	
 }

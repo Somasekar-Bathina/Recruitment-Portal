@@ -94,10 +94,13 @@ public class LoginServiceImpl implements LoginService{
 			log.info("Login Response :{}",response);
 			return response;
 		}
-		CandidateDetails candDetails = candRepo.getCandidateDetails(loginDetails.getEmail());
-		loginResponse.setUserType(login.getUserType());
 		loginResponse.setEmailId(login.getEmail());
+		loginResponse.setUserType(login.getUserType());
+		if(login.getUserType().equalsIgnoreCase(RPConstants.CANDIDATE)) {
+		CandidateDetails candDetails = candRepo.getCandidateDetails(loginDetails.getEmail());
 		loginResponse.setCandidateDetails(candDetails);
+		}else {
+		}
 		}catch(Exception e) {
 			log.info("Exception occured while finding user account:{}",e.getStackTrace());
 		}

@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class ZipLocations {
 	
 	private String country;
 	
-	@OneToOne(mappedBy = "zipcode",fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "zipcode")
+	@JsonManagedReference
 	private CandidateDetails candDetails;
 }
